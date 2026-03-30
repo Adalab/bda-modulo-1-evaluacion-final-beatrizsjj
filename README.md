@@ -31,3 +31,25 @@ Para buscar un producto en el inventario, he crado la función buscar_producto (
 ### Actualizar stock
 En este caso, la función es muy parecida a la primera para agregar un producto al inventario.
 He creado la función actualizar_stock (nombre, cantidad) y he seguido los mismos pasos que en el primer ejercicio
+
+### Eliminar stock
+Empecé como en el resto de funciones, con un bucle for para identificar si el nombre indicado en la función coincide con algún nombre de los productos del inventario. 
+A continuación, usé el condicional 'if' para aplicar un .remove() si se encontraba en el inventario.
+El else, para imprimir el mensaje en caso de que no se encuentre en el inventario, está debajo del for para que no estuviera dentro del bucle y no se accionara en cada iteración que no coincidía.
+
+
+
+
+
+
+#### Dudas y errores 
+1. Al principio, me costó entender que el inventario era una lista de diccionarios, o sea, una lista, y no un diccionario. Y quería acceder al inventario por clave: inventario [nombre]. Hasta que comprendí que usando el bucle for para recorrer el inventario, tenía que acceder a cada elemento mediante producto ["nombre"], porque producto es cada elemento de la lista, en este caso, producto es cada diccionario que contiene los datos de cada producto.
+2. Otro error que he cometido un par de veces, es este:
+producto ["nombre"] in inventario
+Me di cuenta de que estaba mal planteado porque lo que necesitaba ver realmente es si producto ["nombre"] coincidía con el nombre entre paréntesis de la función (```def eliminar_producto (nombre```)). O sea, que tenía que plantearlo así:
+```producto ["nombre"]== nombre```
+3. Para la función eliminar_producto, me ha costado aplicar las funciones que vimos en clase pop(), clear(), popitem(), remove(), etc. 
+Al principio lo intenté con pop(): producto ["nombre"].pop(), pero me daba error. Al buscar información, encontré que con esa sintaxis estaba intentando borrar un string, y los string no se pueden modificar directamente. Lo que yo necesitaba era borrar un elemento de una lista (el producto completo), y ya averigüé que se hacía con remove().
+Al respecto estuve buscando información sobre las diferentes aplicaciones de pop() en listas o en diccionarios, y me quedó claro que:
+    - En listas, pop() se usa para eliminar un elemento según su posición en esa lista (0, 1, 2...)
+    - En diccionarios, elimina un elemento en función de su clave (nombre, edad, precio....)
