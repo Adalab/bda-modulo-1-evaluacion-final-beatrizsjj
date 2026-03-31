@@ -38,12 +38,19 @@ A continuación, usé el condicional 'if' para aplicar un .remove() si se encont
 El else, para imprimir el mensaje en caso de que no se encuentre en el inventario, está debajo del for para que no estuviera dentro del bucle y no se accionara en cada iteración que no coincidía.
 
 
+### Calcular valor del inventario
+Para calcular el valor del inventario, tenía que crear una función, y utilizar un bucle for para recorrer la lista. Dentro de ese bucle, había que multiplicar el precio por la cantidad de cada producto e ir acumulando esa cantidad para saber el valor total.
+
+En este caso, la dificultad/aprendizaje ha residido en:
+- Acordarme de que para ir sumando elementos, tenía que crear una variable vacía al principio donde ir acumulando la suma.
+- Aprender que la acumulación de una suma o una resta, etc., se puede hacer así: +=
+
 
 
 
 
 #### Dudas y errores 
-1. Al principio, me costó entender que el inventario era una lista de diccionarios, o sea, una lista, y no un diccionario. Y quería acceder al inventario por clave: inventario [nombre]. Hasta que comprendí que usando el bucle for para recorrer el inventario, tenía que acceder a cada elemento mediante producto ["nombre"], porque producto es cada elemento de la lista, en este caso, producto es cada diccionario que contiene los datos de cada producto.
+1. Durante todo el ejercicio, me costó entender que el inventario era una lista de diccionarios, o sea, una lista, y no un diccionario. Y quería acceder al inventario por clave: inventario [nombre]. Hasta que comprendí que usando el bucle for para recorrer el inventario, tenía que acceder a cada elemento mediante producto ["nombre"], porque producto es cada elemento de la lista, en este caso, producto es cada diccionario que contiene los datos de cada elemento con su respectivo clave:valor.
 2. Otro error que he cometido un par de veces, es este:
 producto ["nombre"] in inventario
 Me di cuenta de que estaba mal planteado porque lo que necesitaba ver realmente es si producto ["nombre"] coincidía con el nombre entre paréntesis de la función (```def eliminar_producto (nombre```)). O sea, que tenía que plantearlo así:
@@ -53,3 +60,16 @@ Al principio lo intenté con pop(): producto ["nombre"].pop(), pero me daba erro
 Al respecto estuve buscando información sobre las diferentes aplicaciones de pop() en listas o en diccionarios, y me quedó claro que:
     - En listas, pop() se usa para eliminar un elemento según su posición en esa lista (0, 1, 2...)
     - En diccionarios, elimina un elemento en función de su clave (nombre, edad, precio....)
+
+4. Sin duda, el ejercicio más complicado fue el 7 porque implicaba combinar todo. Algunas dificultades que he encontrado haciéndolo:
+    1. La posición del while. Al final, tuve que hacerlo sin el while, y luego intentar encajarlo al final. No entendía muy bien cómo funcionaba, porque estaba intentando ``` while producto_selecionado in inventario```. Al final, cuando ya hice toda la función, fue cuando me di cuenta de que necesitaba saber si el usuario quería seguir comprando o no, y que ahí era donde tendría sentido el while, y ya entendí su sentido:  se aplica cuando se cumple una condición, no para comprobar si algo está en una lista o en un diccionario, para eso estaría el if y el for.
+    2. En general, todo ha sido un poco más difícil porque estaba manejando una lista de diccionario, y no acaba de resultarme fácil buscar o seleccionar elementos de dentro. Busqué en internet, y probé a usar ```inventario.get(producto_elegido)```, hasta que entendí que tenía que usar el for:
+    ```for producto in inventario: if producto["nombre"] == producto_elegido:```
+    3. También tuve problemas para ver cómo actualizaba realmente el inventario. Primero creé una variable ```inventario_actualizado = producto["cantidad"] - cantidad_producto```, pero no modificaba el inventario, solo almacenaba el valor. Al final concluí que lo que tenía que modificar directaemnte era el valor de dentro del diccionario, que no necesitaba otra variable.
+    4. Otras dificultades que fui resolviendo a medida que probaba cómo funcionaba la función:
+        - Colocar el else dentro del bucle for para que funcionara bien y no se imprimieran las dos opciones.
+        - Poner bien los breaks
+        - Comprender bien el flujo de la compra para que todo tuviera lógica y los pasos estuvieran ordenados
+        - Diferenciar entre "producto no encontrado" y "stock insuficiente"
+        - Ubicar bien la indicación de que el producto indicado no existe.
+        - Hacer las iteraciones correctamente 
